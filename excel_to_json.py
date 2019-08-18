@@ -96,7 +96,7 @@ def excel_to_json(filename, sheet_name=None):
 
 # 填充单元格
 # cells = [[0, 2], [1, 2]]
-def fill_cell(filename, cells, sheet_name=None, color='00DB00'):
+def fill_pass_cell(filename, cells, sheet_name=None, color='00DB00'):
     if cells:
         if not filename:
             raise Exception('The filename can not be empty.')
@@ -116,10 +116,31 @@ def fill_cell(filename, cells, sheet_name=None, color='00DB00'):
             sheet['A'+ str(cell[0] + 1)] = 'pass'
         book.save(filename)
 
+def fill_fail_cell(filename,  cells, result= 'fail', sheet_name=None,color='FF0000'):
+    if cells:
+        if not filename:
+            raise Exception('The filename can not be empty.')
+        if not filename.endswith('.xlsx'):
+            raise Exception('The type of file should be xlsx.')
+        book = openpyxl.load_workbook(filename)
+        if sheet_name:
+            if not book.__contains__(sheet_name):
+                raise Exception('The sheet {} is not exist.'.format(sheet_name))
+            else:
+                sheet = book[sheet_name]
+        else:
+            sheet = book.active
+        fill = PatternFill('solid', fgColor=color)
+        for cell in cells:
+            sheet.cell(cell[0] + 1, cell[1] + 1).fill = fill
+            sheet['I'+ str(cell[0] + 1)] = result
+        book.save(filename)
+
 
 if __name__ == '__main__':
     # data = excel_to_json('E:\\test_python\\tools\\test.xlsx')
-    fill_cell('E:\\test_python\\tools\\test.xlsx',[[2,0]])
+    result = 'faaaa'
+    fill_fail_cell('E:\\test_python\\tools\\test.xlsx',[[2,8]],result)
 
 
 
