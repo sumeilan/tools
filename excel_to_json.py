@@ -96,7 +96,7 @@ def excel_to_json(filename, sheet_name=None):
 
 # 填充单元格
 # cells = [[0, 2], [1, 2]]
-def fill_pass_cell(filename, cells, sheet_name=None, color='00DB00'):
+def fill_pass_cell(filename, cells,clear_cells,sheet_name=None, pass_color='00DB00',clear_color='FFFFFF'):
     if cells:
         if not filename:
             raise Exception('The filename can not be empty.')
@@ -110,13 +110,20 @@ def fill_pass_cell(filename, cells, sheet_name=None, color='00DB00'):
                 sheet = book[sheet_name]
         else:
             sheet = book.active
-        fill = PatternFill('solid', fgColor=color)
+        pass_fill = PatternFill('solid', fgColor=pass_color)
+        clear_fill = PatternFill('solid', fgColor=clear_color)
+
         for cell in cells:
-            sheet.cell(cell[0] + 1, cell[1] + 1).fill = fill
+            sheet.cell(cell[0] + 1, cell[1] + 1).fill = pass_fill
             sheet['A'+ str(cell[0] + 1)] = 'pass'
+
+        for cell in clear_cells:
+            sheet.cell(cell[0] + 1, cell[1] + 1).fill = clear_fill
+            sheet['I' + str(cell[0] + 1)] = ''
+
         book.save(filename)
 
-def fill_fail_cell(filename,  cells, result= 'fail', sheet_name=None,color='FF0000'):
+def fill_fail_cell(filename, cells, result= 'fail', sheet_name=None,color='FF0000'):
     if cells:
         if not filename:
             raise Exception('The filename can not be empty.')
@@ -134,13 +141,14 @@ def fill_fail_cell(filename,  cells, result= 'fail', sheet_name=None,color='FF00
         for cell in cells:
             sheet.cell(cell[0] + 1, cell[1] + 1).fill = fill
             sheet['I'+ str(cell[0] + 1)] = result
+            sheet['A' + str(cell[0] + 1)] = 'fail'
         book.save(filename)
 
 
 if __name__ == '__main__':
-    # data = excel_to_json('E:\\test_python\\tools\\test.xlsx')
     result = 'faaaa'
-    fill_fail_cell('E:\\test_python\\tools\\test.xlsx',[[2,8]],result)
+    fill_fail_cell('E:\\test_python\\tools\\datas\\test2.xlsx',[[2,8]],result)
+    fill_pass_cell('E:\\test_python\\tools\\datas\\test2.xlsx',[[2,0]],[[2,8]])
 
 
 

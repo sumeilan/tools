@@ -1,76 +1,38 @@
-import excel_to_json
-import json
+def compare_act(expect_data,actual_datas):
+    if expect_data == actual_datas:
+        return True
 
-json_file = 'E:\\test_python\\tools\\all_json.json'
-excel_file = 'E:\\test_python\\tools\\test1.xlsx'
-excel_datas = excel_to_json.excel_to_json(excel_file)
-report_file = r'E:\\test_python\\tools\test.txt'
-with open(json_file, 'r') as f:
-    json_datas = json.load(f)
-is_pass = []
+def compare_pos(expect_data,actual_datas):
+    if expect_data == actual_datas:
+        return True
 
-for y in range(len(excel_datas)):
-    for i in range(len(json_datas)):
-        if y not in is_pass:
-            if 'refer' in json_datas[i]['ext']:
-                if json_datas[i]['ext']['refer'] == excel_datas[y][5]:
-                    if json_datas[i]['ext']['pos'] == excel_datas[y][4]:
-                        if str(
-                            json_datas[i]['ext']['tag']) == str(
-                                excel_datas[y][2]) and json_datas[i]['ext']['act'] == excel_datas[y][3] and str(
-                                json_datas[i]['event_id']) == str(
-                                excel_datas[y][6]):
+# 非必填
+def compare_refer(expect_data,actual_datas):
+    if expect_data == actual_datas:
+        return True
 
-                            if len(
-                                    json_datas[i]['ext']['value']) == 0 and excel_datas[y][7] == '':
-                                print('第' + str(y + 1) + '条测试通过')
-                                is_pass.append(y)
-                                excel_to_json.fill_cell(excel_file, [[y, 0]])
-                                break
+def compare_tag(expect_data,actual_datas):
+    if str(expect_data) == str(actual_datas):
+        return True
 
-                            elif len(json_datas[i]['ext']['value']) > 0 and excel_datas[y][7] is not None:
-                                print('第' + str(y + 1) + '条测试通过')
-                                is_pass.append(y)
-                                excel_to_json.fill_pass_cell(
-                                    excel_file, [[y, 0]])
-                                break
-                            else:
-                                result = "value不一致--" + "实际value为:" + \
-                                    " ".join(json_datas[i]['ext']['value'])
-                                print(result)
-                                excel_to_json.fill_fail_cell(
-                                    excel_file, [[y, 8]], result)
-                                print(
-                                    '第' + str(y + 1) + '条测试不通过:value不一致-----------', '实际value：:',
-                                    json_datas[i]['ext']['value'], '期望value:',
-                                    excel_datas[y][7])
+#非必填
+def compare_value(expect_data,actual_datas):
+    actual_value = list(filter(None, actual_datas))
+    expect_value = list(filter(None, expect_data))
+    if len(actual_value) == 0 and len(expect_value) ==0:
+        return True
+    elif len(actual_value) > 0 and len(expect_value) >0:
+        return True
+    else:
+        return False
 
-                        else:
-	                        result = "tag-"+str(json_datas[i]['ext']['tag'])+" ext-"+json_datas[i]['ext']['act']+" pos-"\
-	                                 +json_datas[i]['ext']['pos']+" refer-"+json_datas[i]['ext']['refer']\
-	                                 +" eventd-"+json_datas[i]['event_id']+" valueI-"+" ".join(json_datas[i]['ext']['value'])
-                        excel_to_json.fill_fail_cell(
-                            excel_file, [[y, 8]], result)
-                        print(
-                            '第' + str(y + 1) + '条测试不通过-----------',
-                            '期望tag:', excel_datas[y][2],
-                            '实际tag:', json_datas[i]['ext']['tag'],
-                            '期望act:', excel_datas[y][3],
-                            '实际act:', json_datas[i]['ext']['act'],
-                            '期望pos:', excel_datas[y][4],
-                            '实际pos:', json_datas[i]['ext']['pos'],
-                            '期望refer:', excel_datas[y][5],
-                            '实际refer:', json_datas[i]['ext']['refer'],
-                            '期望event_id:', excel_datas[y][6],
-                            '实际event_id:', json_datas[i]['event_id'])
-                    else:
-                        print(json_datas[i]['ext'])
-                        result = '第' + str(y + 1) + '条测试不通过:value不一致-----------', '实际value：:', json_datas[i]['ext'][
-                            'value'], '期望value:', excel_datas[y][7]
-                        excel_to_json.fill_fail_cell(
-                            excel_file, [[y, 8]], result)
-                        print('第' + str(y + 1) + '条测试不通过-----------',
-                              '实际pos:',
-                              json_datas[i]['ext']['pos'],
-                              '期望refer:',
-                              excel_datas[y][4])
+
+#非必填
+def compare_event_id(expect_data,actual_datas):
+    if str(expect_data) == str(actual_datas):
+        return True
+
+
+
+if __name__ == '__main__':
+    pass
