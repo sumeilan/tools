@@ -2,6 +2,7 @@ import excel_to_json
 import txt_to_json
 import compare
 
+#测试埋点数据
 json_file = 'E:\\test_python\\tools\\datas\\all_json.json'
 excel_file = 'E:\\test_python\\tools\\datas\\test1.xlsx'
 txt_path = 'E:\\test_python\\tools\\datas\\request1.txt'

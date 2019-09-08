@@ -1,6 +1,7 @@
 import json
 import os
 
+#多个json文件合并一个json文件
 def read_json():
 	data = []
 	rootdir = 'E:\\test_python\\tools\\json_data'

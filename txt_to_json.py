@@ -1,5 +1,5 @@
 import json
-
+import re
 datas = []
 jdata= []
 
@@ -19,6 +19,8 @@ def txt_to_json(f_path):
 		# print(jdata)
 		return jdata
 
+
+
 if __name__ == '__main__':
-	f_path = 'E:\\test_python\\tools\\datas\\request1.txt'
+	f_path = 'E:\\test_python\\tools\\datas\\testdatas.txt'
 	txt_to_json(f_path)

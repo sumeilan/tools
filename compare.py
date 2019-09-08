@@ -1,3 +1,5 @@
+#埋点数据要检查的项
+
 def compare_act(expect_data,actual_datas):
     if expect_data == actual_datas:
         return True

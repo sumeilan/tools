@@ -146,9 +146,12 @@ def fill_fail_cell(filename, cells, result= 'fail', sheet_name=None,color='FF000
 
 
 if __name__ == '__main__':
-    result = 'faaaa'
-    fill_fail_cell('E:\\test_python\\tools\\datas\\test2.xlsx',[[2,8]],result)
-    fill_pass_cell('E:\\test_python\\tools\\datas\\test2.xlsx',[[2,0]],[[2,8]])
+    data = [['用例名称', '前提条件', '测试步骤', '预期结果'], ['case1', '1、aaa\n2、bbb', '1、步骤1\n2、步骤2\n3、步骤3', '2、结果\n3、果然']]
+    # json_to_excel_new(data, 'test4.xlsx')
+    # fill_fail_cell('E:\\test_python\\tools\\datas\\test2.xlsx',[[2,8]],result)
+    # fill_pass_cell('E:\\test_python\\tools\\datas\\test2.xlsx',[[2,0]],[[2,8]])
+
+
 
 
 
