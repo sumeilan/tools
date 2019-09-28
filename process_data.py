@@ -1,13 +1,15 @@
-import excel_to_json
+import more_sheets
 import re,numpy
+import pandas
+import pytz,dateutil,xlrd
+
 
 #excel数据去除多余的空行
 def clear_blank_line():
 	new1 = []
 	new2 = []
 
-	exceldatas = excel_to_json.excel_to_json('E:\\test_python\\tools\\datas\\test3.xlsx')
-	# print(exceldatas)
+	exceldatas = more_sheets.excel_to_json('E:\\test_python\\tools\\datas\\493.xlsx')
 	for i in range(len(exceldatas)):
 
 		for y in range(len(exceldatas[i])):
@@ -16,8 +18,13 @@ def clear_blank_line():
 			new1.append(new)
 		new2.append(new1)
 		new1 = []
-	# print(new2)
-	excel_to_json.json_to_excel_new(new2,'test4.xlsx')
+
+	more_sheets.json_to_excel_new(new2,'test493.xlsx')
+	data = pandas.DataFrame(pandas.read_excel('test493.xlsx'))
+	no_re_row = data.drop_duplicates()  #删除重复的行
+	no_re_row.to_excel("test493.xlsx")
+
+
 
 if __name__ == '__main__':
 	clear_blank_line()

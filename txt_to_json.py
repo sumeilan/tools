@@ -1,5 +1,7 @@
 import json
 import re
+
+#将txt数据转为json
 datas = []
 jdata= []
 

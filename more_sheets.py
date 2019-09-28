@@ -4,6 +4,7 @@ import time
 import random
 import openpyxl
 from openpyxl.styles import  PatternFill
+#excel有多个sheet
 
 # json转excel - 新建/覆盖
 # data = [[1, 2, 3], [4, 5, 6]]
@@ -76,24 +77,37 @@ def excel_to_json(filename, sheet_name=None):
     if not filename.endswith('.xlsx'):
         raise Exception('The type of file should be xlsx.')
     book = openpyxl.load_workbook(filename)
+
     if sheet_name:
         if not book.__contains__(sheet_name):
             raise Exception('The sheet {} is not exist.'.format(sheet_name))
         else:
             sheet = book[sheet_name]
-            print(sheet)
+            sheets = book.worksheets
+
     else:
-        sheet = book.active
-        print(sheet)
-    data = []
-    for row in sheet.iter_rows():
-        row_data = []
-        for cell in row:
-            if cell.value:
-                row_data.append(cell.value)
-            else:
-                row_data.append('')
-        data.append(row_data)
+        # sheet = book.active
+        sheets = book.worksheets
+        data = []
+        for she in sheets:
+	        for row in she.iter_rows():
+		        row_data = []
+		        for cell in row:
+			        if cell.value:
+				        row_data.append(cell.value)
+			        else:
+				        row_data.append('')
+		        data.append(row_data)
+        # print(sheets)
+    # data = []
+    # for row in sheet.iter_rows():
+    #     row_data = []
+    #     for cell in row:
+    #         if cell.value:
+    #             row_data.append(cell.value)
+    #         else:
+    #             row_data.append('')
+    #     data.append(row_data)
     return data
 
 # 填充单元格
