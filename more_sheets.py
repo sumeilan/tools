@@ -160,6 +160,27 @@ def fill_fail_cell(filename, cells, result= 'fail', sheet_name=None,color='FF000
             sheet['A' + str(cell[0] + 1)] = 'fail'
         book.save(filename)
 
+def fill_cell(filename, cells, sheet_name=None,color='FFA500'):
+    if cells:
+        if not filename:
+            raise Exception('The filename can not be empty.')
+        if not filename.endswith('.xlsx'):
+            raise Exception('The type of file should be xlsx.')
+        book = openpyxl.load_workbook(filename)
+        if sheet_name:
+            if not book.__contains__(sheet_name):
+                raise Exception('The sheet {} is not exist.'.format(sheet_name))
+            else:
+                sheet = book[sheet_name]
+        else:
+            sheet = book.active
+        fill = PatternFill('solid', fgColor=color)
+        for cell in cells:
+            sheet.cell(cell[0] + 1, cell[1] + 1).fill = fill
+        book.save(filename)
+        print('done绿色')
+
+
 
 if __name__ == '__main__':
     # data = [['用例名称', '前提条件', '测试步骤', '预期结果'], ['case1', '1、aaa\n2、bbb', '1、步骤1\n2、步骤2\n3、步骤3', '2、结果\n3、果然']]
