@@ -2,7 +2,7 @@ import excel_to_json
 import txt_to_json
 import compare
 
-#测试埋点数据
+# 测试埋点数据
 json_file = 'E:\\test_python\\tools\\datas\\all_json.json'
 excel_file = 'E:\\test_python\\tools\\datas\\test1.xlsx'
 txt_path = 'E:\\test_python\\tools\\datas\\request1.txt'
@@ -53,7 +53,7 @@ for y in range(1, len(excel_datas)):
                     break
                 else:
                     fail_result = 'value-' + str(json_datas[i]['ext']['value']) + '，refer-' + str(
-	                    json_datas[i]['ext']['refer']) + ',event_id-' + str(json_datas[i]['event_id'])
+                        json_datas[i]['ext']['refer']) + ',event_id-' + str(json_datas[i]['event_id'])
                     excel_to_json.fill_fail_cell(excel_file, [[y, 8]], fail_result)
                     print('第' + str(y + 1) + '条测试不通过', )
                     print(fail_result)

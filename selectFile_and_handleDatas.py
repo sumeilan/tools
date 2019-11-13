@@ -3,7 +3,7 @@ from tkinter import *
 import tkinter.messagebox
 from tkinter.filedialog import askopenfilename
 import process_data
-import os,xlrd
+import xlrd
 import excel_to_json
 
 # 选择文件
@@ -15,18 +15,16 @@ def choose_file():
 # 处理文件
 def handle_data():
     source_path = e.get()  # 要处理的文件路径
-    root = os.getcwd()  # 获取当前路径
-    excel_name = root + r'\datas\柠檬精1.0.xlsx'
-    output_path = root + r'\datas\柠檬精.xlsx'
-    wb = xlrd.open_workbook(excel_name)
+    wb = xlrd.open_workbook(source_path)
     sheets = wb.sheet_names()
 
     for sheet in sheets:
         datas = excel_to_json.excel_to_json(source_path, sheet)
-        output_path = root + r'\datas\柠檬精' + sheet + '.xlsx'
+        name = e.get().split('.xlsx')
+        output_path = name[0] + '_' + sheet + '.xlsx'
         process_data.clear_blank_line(output_path, datas, sheet)
 
-    if tkinter.messagebox.askquestion('处理完毕', '文件保存的路径：' + output_path + '\n' + '是否退出？'):
+    if tkinter.messagebox.askquestion('处理完毕', '文件已保存到 ' + name[0] + '\n' + '是否退出？'):
         top.quit()
 
 top = Tk()

@@ -14,7 +14,6 @@ def clear_blank_line(output_path,exceldatas,sheet):
         new2.append(new1)
         new1 = []
 
-    print(sheet)
     excel_to_json.json_to_excel_append(new2,output_path,sheet)
     data = pandas.DataFrame(pandas.read_excel(output_path))
     no_re_row = data.drop_duplicates()  #删除重复的行
