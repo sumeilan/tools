@@ -81,10 +81,10 @@ def excel_to_json(filename, sheet_name=None):
             raise Exception('The sheet {} is not exist.'.format(sheet_name))
         else:
             sheet = book[sheet_name]
-            print(sheet)
+            # print(sheet)
     else:
         sheet = book.active
-        print(sheet)
+        # print(sheet)
     data = []
     for row in sheet.iter_rows():
         row_data = []
@@ -164,13 +164,16 @@ def fill_cell(filename, cells, sheet_name=None,color='FFA500'):
         for cell in cells:
             sheet.cell(cell[0] + 1, cell[1] + 1).fill = fill
         book.save(filename)
-        print('done')
+        # print('done')
 
 if __name__ == '__main__':
+    pass
     # data = [['用例名称', '前提条件', '测试步骤', '预期结果'], ['case1', '1、aaa\n2、bbb', '1、步骤1\n2、步骤2\n3、步骤3', '2、结果\n3、果然']]
     # json_to_excel_new(data, 'test4.xlsx')
-    json_datas = excel_to_json('E:\\test_python\\tools\\datas\\test.xlsx')
-    print(json_datas)
+    # sheet1 = excel_to_json(r'E:\python\tools\datas\test4.xlsx','Sheet1')
+    # sheet2 = excel_to_json(r'E:\python\tools\datas\test4.xlsx', 'Sheet2')
+    # json_to_excel_append(sheet1, 'test4444444.xlsx','Sheet1',)
+    # json_to_excel_append(sheet2, 'test4444444.xlsx', 'Sheet2', )
     # fill_fail_cell('E:\\test_python\\tools\\datas\\test2.xlsx',[[2,8]],result)
     # fill_pass_cell('E:\\test_python\\tools\\datas\\test2.xlsx',[[2,0]],[[2,8]])
 
