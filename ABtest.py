@@ -1,5 +1,6 @@
 import requests
 import re, random, numpy,HmacSHA256,json
+import total_ABtest
 
 def get_act_id(datas):
     actid_pattern = r'\'act_id\': \d+'  # 模式字符串
@@ -28,16 +29,30 @@ def get_type(datas):
     for i in numpy.unique(num):
         tdata.append(sorted(num).count(i))
     print('-------备注：10=爬虫视频，9=爬虫图片，4=漫画，2=漫剧-------')
-    print('总数=',len(type),' 各个类型及对应数量', dict(zip(numpy.unique(num), tdata)))
+    print('内容总数=',len(type),' 各个类型及对应数量', dict(zip(numpy.unique(num), tdata)))
 
     if type:
         return type
     else:
         return None
 
-url = 'http://api.lemondream.cn/api/recommend/get_recommend_content_list'
+def get_rec_package_id(datas):
+    package_id_pattern = r'\'rec_package_id\': \'[a-z]+\''  # 模式字符串
+    rec_package_id = re.findall(package_id_pattern, str(datas), re.I)  # 匹配字符串不区分大小
+    pac_pattern = r'\'[a-z]+\''
+    pac = re.findall(pac_pattern, str(rec_package_id), re.I)
+    pacd = []
+    for i in numpy.unique(pac):
+        pacd.append(sorted(pac).count(i))
+    # print('爬虫总数=',len(rec_package_id),dict(zip(numpy.unique(pac), pacd)))
 
-device_token = random.sample(range(1,20), 10)  # 生成2个随机数，范围是1-100
+    if rec_package_id:
+        return rec_package_id
+    else:
+        return None
+
+url = 'http://api.lemondream.cn/api/recommend/get_recommend_content_list'
+device_token = random.sample(range(1,20), 2)  # 生成2个随机数，范围是1-100
 act_total = []
 for i in device_token:
     params = {'page':'1', 'pageSize': '20', 'app_key': 'lemondream','scene_id':'2001','device_token':i}
@@ -49,15 +64,19 @@ for i in device_token:
         "Authorization": Authorization
     }
     response = requests.post(url, json=params, headers=header, verify=False)
+    datas = response.json()['data']
     act_id = get_act_id(response.json()['data'])
     act_total.append(act_id[0])
     show_tag_type = get_show_tag_type(response.json()['data'])
     print('\n', 'device_token=', i)
     print(act_id, show_tag_type)
-    print(response.text)
+    # print(response.text)
     get_type(response.json()['data'])
+    rec_package_id = get_rec_package_id(response.json()['data'])
+    total_ABtest.total(datas['list'])
 
 tt = []
 for i in numpy.unique(act_total):
     tt.append(sorted(act_total).count(i))
-print('\n', dict(zip(numpy.unique(act_total), tt)))
+print('\n', 'act_id统计：',dict(zip(numpy.unique(act_total), tt)))
+
