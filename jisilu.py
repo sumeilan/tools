@@ -1,8 +1,10 @@
 import requests,json,time
-
+from tkinter import *
+import tkinter.messagebox
 class fund:
-    mstime = int(round(time.time() * 1000))
-    host = 'https://www.jisilu.cn/data/'
+    def __init__(self):
+        self.mstime = int(round(time.time() * 1000))
+        self.host = 'https://www.jisilu.cn/data/'
 
     def get_fund_id(self,datas, ids):
         fund = []
@@ -46,6 +48,3 @@ etf_fund_ids =  [512580, 512980, 512880,515180,510300,510510,159938]
 QDII_fund = F.get_QDII(qdii_fund_ids)
 ETF_fund = F.get_ETF(etf_fund_ids)
 F.show_fund(QDII_fund,ETF_fund)
-
-
-
