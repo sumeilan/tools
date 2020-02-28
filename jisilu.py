@@ -1,18 +1,49 @@
-import requests,json
-import re
-def get_fund_id(datas,select_id):
-    fund = [('基金代码','基金名称','现价','溢价率')]
-    for i in datas:
-        QDII = i
-        if QDII['id'] == str(select_id):
-            d_QDII = QDII['cell']['fund_id'],QDII['cell']['fund_nm'],QDII['cell']['price'],QDII['cell']['discount_rt']
-            fund.append(d_QDII)
-    print(fund)
+import requests,json,time
+
+class fund:
+    mstime = int(round(time.time() * 1000))
+    host = 'https://www.jisilu.cn/data/'
+
+    def get_fund_id(self,datas, ids):
+        fund = []
+        for i in datas:
+            QDII = i
+            for i in ids:
+                if QDII['id'] == str(i):
+                    d_QDII = QDII['cell']['fund_id'], QDII['cell']['fund_nm'], QDII['cell']['price'], QDII['cell'][
+                        'fund_nav'], QDII['cell']['estimate_value'], QDII['cell']['discount_rt']
+                    fund.append(d_QDII)
+        return fund
+
+    def get_QDII(self):
+        fund = [('QDII基金代码', '基金名称', '现价', '净值', '最新估值', '溢价率')]
+        path  = 'qdii/qdii_list/?___jsl=LST___t= '
+        url = self.host + path + str(self.mstime)
+        response = requests.get(url)
+        datas = json.loads(response.text)
+        fund_ids = [162411, 159920, 513520]
+        QDII_fund = self.get_fund_id(datas['rows'], fund_ids)
+        return fund + QDII_fund
+
+    def get_ETF(self):
+        fund = [('ETF基金代码', '基金名称', '现价', '净值', '最新估值', '溢价率')]
+        path = 'etf/etf_list/?___jsl=LST___t='
+        url = self.host + path + str(self.mstime)
+        response = requests.get(url)
+        datas = json.loads(response.text)
+        fund_ids = [512580, 512980, 512880]
+        QDII_fund = self.get_fund_id(datas['rows'], fund_ids)
+        return fund + QDII_fund
 
 
-#QDII
-response = requests.get('https://www.jisilu.cn/data/qdii/qdii_list/?___jsl=LST___t=1582859926238&rp=25&page=1')
-j_data = json.loads(response.text)
-print(get_fund_id(j_data['rows'],162411))
+F = fund()
+QDII_fund = F.get_QDII()
+for i in QDII_fund:
+    print(i)
+print('\n')
+ETF_fund = F.get_ETF()
+for i in ETF_fund:
+    print(i)
+
 
 
