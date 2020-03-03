@@ -15,6 +15,7 @@ class App(object):
         # cmd = "adb shell am start -W -n com.mallestudio.flash/.ui.splash.LauncherActivity"
         cmd = "adb shell am start -W -n com.mallestudio.gugu.app/com.mallestudio.gugu.modules.StartActivity"
         self.content = os.popen(cmd)
+
     #停止App
     def StopApp(self):
         # cmd = "adb shell am force-stop com.mallestudio.flash"
