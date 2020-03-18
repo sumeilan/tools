@@ -52,10 +52,11 @@ def get_rec_package_id(datas):
         return None
 
 # url = 'http://api.lemondream.cn/api/recommend/get_recommend_content_list'
-url = 'http://api-api2.lemondream.cn/api/recommend/get_recommend_content_list'
-# url = 'http://lemondream.chumanapp.com/api/recommend/get_recommend_content_list'
+# url = 'http://api-api2.lemondream.cn/api/recommend/get_recommend_content_list'
+url = 'http://lemondream.chumanapp.com/api/recommend/get_recommend_content_list'
+aurl= 'http://lemondream.chumanapp.com/api/recommend/get_home_page_zone_list'
 
-device_token = random.sample(range(1,100),20)  # 生成2个随机数，范围是1-100
+device_token = random.sample(range(1,100),10)  # 生成2个随机数，范围是1-100
 act_total = []
 for i in device_token:
     params = {'page':'1', 'pageSize': '20', 'app_key': 'lemondream','scene_id':'2001','device_token':i}

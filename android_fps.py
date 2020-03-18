@@ -11,16 +11,15 @@ class App(object):
         self.startTime=""
     #启动App
     def LaunchApp(self):
-        # cmd = "adb shell am start -W -n com.mallestudio.flash/.ui.splash.LauncherActivity"
-        laynchapp = "adb shell am start -W -n com.mallestudio.flash/.ui.splash.LauncherActivity"
-        time.sleep(2)
-        os.popen(laynchapp)
+        # laynchapp = "adb shell am start -W -n com.mallestudio.flash/.ui.splash.LauncherActivity"
+        # time.sleep(2)
+        # os.popen(laynchapp)
         swipe = "adb shell input swipe 500 800 500 10"
-        for i in range(2):
-            time.sleep(1)
+        for i in range(50):
+            time.sleep(20)
             os.popen(swipe)
-        cmd = "adb shell dumpsys gfxinfo com.mallestudio.flash > E:/python/tools/fps.txt"
-        self.content = os.popen(cmd)
+        # cmd = "adb shell dumpsys gfxinfo com.mallestudio.flash.debug > E:/python/tools/fps.txt"
+        # self.content = os.popen(cmd)
 
     def control_datas(self):
         #待补充

@@ -12,14 +12,14 @@ class App(object):
         self.startTime=""
     #启动App
     def LaunchApp(self):
-        # cmd = "adb shell am start -W -n com.mallestudio.flash/.ui.splash.LauncherActivity"
-        cmd = "adb shell am start -W -n com.mallestudio.gugu.app/com.mallestudio.gugu.modules.StartActivity"
+        cmd = "adb shell am start -W -n com.mallestudio.flash/.ui.splash.LauncherActivity"
+        # cmd = "adb shell am start -W -n com.mallestudio.gugu.app/com.mallestudio.gugu.modules.StartActivity"
         self.content = os.popen(cmd)
 
     #停止App
     def StopApp(self):
-        # cmd = "adb shell am force-stop com.mallestudio.flash"
-        cmd = "adb shell am force-stop com.mallestudio.gugu.app"
+        cmd = "adb shell am force-stop com.mallestudio.flash"
+        # cmd = "adb shell am force-stop com.mallestudio.gugu.app"
         os.popen(cmd)
     #获取启动时间
     def GetLaunchedTime(self):
@@ -59,12 +59,12 @@ class Controller(object):
 
     #数据的存储
     def SaveDataToCSV(self):
-        csvfile = open("startTime2.csv","w")
+        csvfile = open("startTime.csv","w")
         writer = csv.writer(csvfile)
         writer.writerows(self.alldata)
         csvfile.close()
 
 if __name__ == "__main__":
-    controller = Controller(1)
+    controller = Controller(10)
     controller.run()
     controller.SaveDataToCSV()

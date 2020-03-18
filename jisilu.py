@@ -47,7 +47,7 @@ class fund:
 
 
 F = fund()
-qdii_fund_ids =[162411, 159920, 513520,160416]
+qdii_fund_ids =[162411, 159920, 513520,160416,513030]
 etf_fund_ids =  [512580, 512980, 512880,515180,510510,159938,159940]
 my_fund = [510300,510500,513500,513100]
 QDII_fund = F.get_QDII(qdii_fund_ids)
