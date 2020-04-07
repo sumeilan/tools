@@ -54,9 +54,9 @@ def get_rec_package_id(datas):
 # url = 'http://api.lemondream.cn/api/recommend/get_recommend_content_list'
 # url = 'http://api-api2.lemondream.cn/api/recommend/get_recommend_content_list'
 url = 'http://lemondream.chumanapp.com/api/recommend/get_recommend_content_list'
-aurl= 'http://lemondream.chumanapp.com/api/recommend/get_home_page_zone_list'
+# url= 'http://lemondream.chumanapp.com/api/recommend/get_home_page_zone_list'
 
-device_token = random.sample(range(1,100),10)  # 生成2个随机数，范围是1-100
+device_token = random.sample(range(1,100),1)  # 生成2个随机数，范围是1-100
 act_total = []
 for i in device_token:
     params = {'page':'1', 'pageSize': '20', 'app_key': 'lemondream','scene_id':'2001','device_token':i}
@@ -65,7 +65,8 @@ for i in device_token:
         "Content-Type": "application/json",
         "channel": "default",
         "X-Token": "4b5e4c5a02",
-        "Authorization": Authorization
+        "Authorization": Authorization,
+        "biData":'{"appDeviceId":"V1_fb668ae0de89001da27a586085f66d85e88b29cd002c780cbc7dc1b8b06936f0"}'
     }
     response = requests.post(url, json=params, headers=header, verify=False)
     datas = response.json()['data']
