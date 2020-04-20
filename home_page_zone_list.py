@@ -2,6 +2,7 @@
 import requests
 import re, random, numpy,HmacSHA256,json
 
+
 def get_act_id(datas):
     actid_pattern = r'\'act_id\': \d+'  # 模式字符串
     act_id = re.findall(actid_pattern, str(datas), re.I)  # 匹配字符串不区分大小
@@ -26,7 +27,7 @@ def get_zone_id(datas):
 url= 'http://api-api2.lemondream.cn/api/recommend/get_home_page_zone_list'
 # url= 'http://lemondream.chumanapp.com/api/recommend/get_home_page_zone_list'
 
-device_token = random.sample(range(1,100),10)  # 生成2个随机数，范围是1-100
+device_token = random.sample(range(30,50),20)  # 生成2个随机数，范围是1-100
 act_total = []
 for i in device_token:
     params = {'page':'1', 'pageSize': '20', 'app_key': 'lemondream','scene_id':'2001','device_token':i}
@@ -41,6 +42,7 @@ for i in device_token:
     }
     response = requests.post(url, json=params, headers=header, verify=False)
     datas = response.json()['data']
+    print(datas)
     act_id = get_act_id(datas)
     zone_id = get_zone_id(datas)
     print(act_id)
