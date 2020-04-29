@@ -24,27 +24,29 @@ def get_zone_id(datas):
     else:
         return None
 
-# url= 'http://api-api2.lemondream.cn/api/recommend/get_home_page_zone_list'
-url= 'http://lemondream.chumanapp.com/api/recommend/get_home_page_zone_list'
-device_token = random.sample(range(30,50),5)  # 生成2个随机数，范围是1-100
+
+# url= 'http://lemondream.chumanapp.com/api/recommend/get_home_page_zone_list'
+url = 'http://api-api2.lemondream.cn/api/recommend/get_zone_content_list'
+device_token = random.sample(range(1,50),2)  # 生成2个随机数，范围是1-100
 act_total = []
 for i in device_token:
-    params = {'page':'1', 'pageSize': '20', 'app_key': 'lemondream','scene_id':'2001','device_token':i}
+    params = {'page':'1', 'pageSize': '20', 'app_key': 'lemondream','scene_id':'2001','device_token':i,'zone_id':8}
     Authorization = HmacSHA256.sh258(json.dumps(params))
     bidata = '{"appDeviceId":"'+ str(i) +'"}'
     header = {
         "Content-Type": "application/json",
         "channel": "default",
         "X-Token": "4b5e4c5a02",
+        "versionCode":"android_1.8.0",
         "Authorization": Authorization,
         "biData":str(bidata)
     }
     response = requests.post(url, json=params, headers=header, verify=False)
     datas = response.json()['data']
-    print(datas)
+    print(response.text)
     act_id = get_act_id(datas)
     zone_id = get_zone_id(datas)
     print(act_id)
-    print(zone_id)
+    # print(zone_id)
 
 
