@@ -4,7 +4,7 @@ import tkinter.messagebox
 from tkinter.filedialog import askopenfilename
 import process_data
 import xlrd
-import excel_to_json
+import excel_to_json,format_excel
 
 # 选择文件
 def choose_file():
@@ -24,6 +24,7 @@ def handle_data():
         output_path = name[0] + '_' + sheet + '.xlsx'
         process_data.clear_blank_line(output_path, datas, sheet)
 
+    format_excel.format_excel(output_path)
     if tkinter.messagebox.askquestion('处理完毕', '文件已保存到 ' + name[0] + '\n' + '是否退出？'):
         top.quit()
 

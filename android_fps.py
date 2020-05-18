@@ -14,9 +14,9 @@ class App(object):
         # laynchapp = "adb shell am start -W -n com.mallestudio.flash/.ui.splash.LauncherActivity"
         # time.sleep(2)
         # os.popen(laynchapp)
-        swipe = "adb shell input swipe 500 800 500 10"
-        for i in range(50):
-            time.sleep(20)
+        swipe = "adb shell input swipe 500 500 100 500"
+        for i in range(18):
+            time.sleep(5)
             os.popen(swipe)
         # cmd = "adb shell dumpsys gfxinfo com.mallestudio.flash.debug > E:/python/tools/fps.txt"
         # self.content = os.popen(cmd)
