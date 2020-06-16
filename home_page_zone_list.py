@@ -26,7 +26,7 @@ def get_zone_id(datas):
 
 # url= 'http://api-api2.lemondream.cn/api/recommend/get_home_page_zone_list'
 url= 'http://lemondream.chumanapp.com/api/recommend/get_home_page_zone_list'
-device_token = random.sample(range(30,50),5)  # 生成2个随机数，范围是1-100
+device_token = random.sample(range(30,50),1)  # 生成2个随机数，范围是1-100
 act_total = []
 for i in device_token:
     params = {'page':'1', 'pageSize': '20', 'app_key': 'lemondream','scene_id':'2001','device_token':i}

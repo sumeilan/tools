@@ -44,7 +44,8 @@ class Controller(object):
         self.app.StopApp()
         currenttime = self.getCurrentTime()
         time.sleep(3)
-        self.alldata.append((currenttime,elapsedtime))
+        self.alldata.append((currenttime,int(elapsedtime)))
+        print(int(elapsedtime))
 
     #多次执行测试过程
     def run(self):
