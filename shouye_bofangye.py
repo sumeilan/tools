@@ -17,7 +17,7 @@ def click():
 def scan(nums):
     LaunchApp()
     time.sleep(6)
-    swipe = "adb shell input swipe 500 1000 500 10"
+    swipe = "adb shell input swipe 500 800 500 10"
     for i in range(nums):
         time.sleep(2)
         os.popen(swipe)
