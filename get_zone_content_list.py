@@ -35,7 +35,7 @@ def get_zone_id(datas):
         return None
 
 
-url= 'http://lemondream.chumanapp.com/api/recommend/get_zone_content_list'
+url= 'http://api-demo.lemondream.cn/api/recommend/get_zone_content_list'
 # url = 'http://api-api2.lemondream.cn/api/recommend/get_zone_content_list'
 device_token = random.sample(range(1,50),2)  # 生成2个随机数，范围是1-100
 act_total = []
