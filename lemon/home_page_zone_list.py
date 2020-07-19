@@ -25,7 +25,7 @@ def get_zone_id(datas):
         return None
 
 # url= 'http://api-api2.lemondream.cn/api/recommend/get_home_page_zone_list'
-url= 'http://lemondream.chumanapp.com/api/recommend/get_home_page_zone_list'
+url= 'http://api-demo.lemondream.cn/api/recommend/get_home_page_zone_list'
 device_token = random.sample(range(30,50),1)  # 生成2个随机数，范围是1-100
 act_total = []
 for i in device_token:
@@ -41,10 +41,10 @@ for i in device_token:
     }
     response = requests.post(url, json=params, headers=header, verify=False)
     datas = response.json()['data']
-    print(datas)
+    # print(datas)
     act_id = get_act_id(datas)
     zone_id = get_zone_id(datas)
-    print(act_id)
-    print(zone_id)
+    print("act_id",act_id)
+    print("zone_id",zone_id)
 
 

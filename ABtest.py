@@ -53,7 +53,7 @@ def get_rec_package_id(datas):
 
 # url = 'http://api.lemondream.cn/api/recommend/get_recommend_content_list'
 # url = 'http://api-api2.lemondream.cn/api/recommend/get_recommend_content_list'
-url = 'http://lemondream.chumanapp.com/api/recommend/get_recommend_content_list'
+url = 'http://api-demo.lemondream.cn/api/recommend/get_recommend_content_list'
 # url= 'http://lemondream.chumanapp.com/api/recommend/get_home_page_zone_list'
 
 device_token = random.sample(range(1,100),1)  # 生成2个随机数，范围是1-100
@@ -74,7 +74,7 @@ for i in device_token:
     act_total.append(act_id[0])
     show_tag_type = get_show_tag_type(response.json()['data'])
     print('\n', 'device_token=', i)
-    print(act_id, show_tag_type)
+    # print(act_id, show_tag_type)
     # print(response.text)
     get_type(response.json()['data'])
     rec_package_id = get_rec_package_id(response.json()['data'])

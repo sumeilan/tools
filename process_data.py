@@ -1,6 +1,6 @@
-import excel_to_json
+from base import excel_to_json
 import re
-import numpy,pandas
+import pandas
 
 #excel数据去除多余的空行、重复的数据
 def clear_blank_line(output_path,exceldatas,sheet):
@@ -14,7 +14,7 @@ def clear_blank_line(output_path,exceldatas,sheet):
         new2.append(new1)
         new1 = []
 
-    excel_to_json.json_to_excel_append(new2,output_path,sheet)
+    excel_to_json.json_to_excel_append(new2, output_path, sheet)
     data = pandas.DataFrame(pandas.read_excel(output_path))
     no_re_row = data.drop_duplicates()  #删除重复的行
     no_re_row.to_excel(output_path,index=False)
@@ -23,7 +23,7 @@ def clear_blank_line(output_path,exceldatas,sheet):
             if '？？' in str(data.loc[indexs].values[i]):
                 excel_to_json.fill_cell(output_path, [[indexs + 1, i]])
             if '??' in str(data.loc[indexs].values[i]):
-                excel_to_json.fill_cell(output_path,[[indexs+1,i]])
+                excel_to_json.fill_cell(output_path, [[indexs + 1, i]])
 
 
 

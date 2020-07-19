@@ -4,7 +4,9 @@ import tkinter.messagebox
 from tkinter.filedialog import askopenfilename
 import process_data
 import xlrd
-import excel_to_json,format_excel
+from base import excel_to_json
+from format import format_excel
+
 
 # 选择文件
 def choose_file():

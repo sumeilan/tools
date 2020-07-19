@@ -1,5 +1,4 @@
-import excel_to_json
-import txt_to_json
+from base import txt_to_json, excel_to_json
 import compare
 
 # 测试埋点数据

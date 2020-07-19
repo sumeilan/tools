@@ -19,17 +19,32 @@ def get_type(datas,ty):
 def total(datas):
     type9 = []
     type10 = []
-
+    type11 = []
+    type12 = []
+    type51 = []
     for i in datas:
-        # print(i)
         if get_type(i,'9') is not None:
             type9.append(int(get_type(i,'9')[0]))
 
         if get_type(i,'10') is not None:
             type10.append(int(get_type(i,'10')[0]))
 
+        if get_type(i,'11') is not None:
+            type11.append(int(get_type(i,'11')[0]))
+
+        if get_type(i,'12') is not None:
+            type12.append(int(get_type(i,'12')[0]))
+
+        if get_type(i,'51') is not None:
+            type51.append(int(get_type(i,'51')[0]))
+
+
+
     print('type=9',type9)
     print('type=10', type10)
+    # print('type=11', type11)
+    # print('type=12', type12)
+    # print('type=51', type51)
 
 url = 'http://api-demo.lemondream.cn/api/recommend/get_recommend_content_list'
 device_token = random.sample(range(1,20), 1)  # 生成2个随机数，范围是1-100
