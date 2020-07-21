@@ -2,7 +2,7 @@
 import requests
 import re, random, numpy,HmacSHA256,json
 
-
+#tab 列表
 def get_act_id(datas):
     actid_pattern = r'\'act_id\': \d+'  # 模式字符串
     act_id = re.findall(actid_pattern, str(datas), re.I)  # 匹配字符串不区分大小
@@ -31,13 +31,16 @@ act_total = []
 for i in device_token:
     params = {'page':'1', 'pageSize': '20', 'app_key': 'lemondream','scene_id':'2001','device_token':i}
     Authorization = HmacSHA256.sh258(json.dumps(params))
-    bidata = '{"appDeviceId":"'+ str(i) +'"}'
+    AuthorizationV2 = HmacSHA256.sh258_v2(json.dumps(params))
+    bidata = '{"appDeviceId":"' + str(i) + '"}'
     header = {
         "Content-Type": "application/json",
         "channel": "default",
         "X-Token": "4b5e4c5a02",
+        "versionCode": "android_2.1.0",
         "Authorization": Authorization,
-        "biData":str(bidata)
+        "AuthorizationV2": AuthorizationV2,
+        "biData": str(bidata)
     }
     response = requests.post(url, json=params, headers=header, verify=False)
     datas = response.json()['data']
