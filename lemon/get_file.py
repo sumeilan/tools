@@ -22,7 +22,7 @@ def files(file_dir):
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
-        file_name = sys.argv[1]
+        file_name= sys.argv[1]
         # file = 'E:\\test_python\\testcase\\report'
         files(file_name)
 
