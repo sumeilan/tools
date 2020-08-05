@@ -70,6 +70,11 @@ def del_all_excel(file):
         ws.delete_rows(1, ws.max_row)
     workbook.save(file)
 
+def get_sheets(file):
+    workbook = openpyxl.load_workbook(filename=file)
+    names = workbook.sheetnames
+    return names
+
 
 # 删除null行的数据
 def del_null_row(file):
@@ -86,20 +91,22 @@ def del_null_row(file):
 
 
 if __name__ == '__main__':
-    root = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-    # file_name = root + '\\tools\\datas\\test2.xlsx'
-    file_name = sys.argv[1]
-    print(file_name)
-    print(sys.argv[1], sys.argv[2])
-
-    param = sys.argv[2]
-    if param == 'format_excel':
-        format_excel(file_name)
-    elif param == 'format_normal_excel':
-        format_normal_excel(file_name)
-    elif param == 'del_excel':
-        del_excel(file_name)
-    elif param == 'del_all_excel':
-        del_all_excel(file_name)
-    else:
-        del_null_row(file_name)
+    file_name = "E:\\python\\tools\\datas\\test2.xlsx"
+    get_sheets(file_name)
+    # file_name = sys.argv[1]
+    # print(file_name)
+    # print(sys.argv[1], sys.argv[2])
+    #
+    # param = sys.argv[2]
+    # if param == 'format_excel':
+    #     format_excel(file_name)
+    # elif param == 'format_normal_excel':
+    #     format_normal_excel(file_name)
+    # elif param == 'del_excel':
+    #     del_excel(file_name)
+    # elif param == 'del_all_excel':
+    #     del_all_excel(file_name)
+    # elif param == 'sheets':
+    #     get_sheets(file_name)
+    # else:
+    #     del_null_row(file_name)

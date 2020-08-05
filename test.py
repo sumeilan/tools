@@ -1,6 +1,7 @@
 import requests
-import re, random, numpy,HmacSHA256,json
-import total_ABtest
+import re, random, HmacSHA256,json
+
+
 def get_access_token(datas):
     token_pattern = r'\'access_token\': \'[A-Za-z0-9]+\''  # 模式字符串
     access_token = re.findall(token_pattern, str(datas), re.I)  # 匹配字符串不区分大小

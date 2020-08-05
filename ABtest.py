@@ -1,6 +1,7 @@
 import requests
 import re, random, numpy,HmacSHA256,json
-import total_ABtest
+from lemon import total_ABtest
+
 
 def get_act_id(datas):
     actid_pattern = r'\'act_id\': \d+'  # 模式字符串

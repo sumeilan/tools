@@ -16,3 +16,4 @@ image_url = response.json()['data']['info']['video_obj']['url']
 print('标题：',title)
 print('视频地址：',video_url)
 print('封面',image_url)
+
