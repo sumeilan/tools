@@ -1,47 +1,20 @@
-# encoding:utf-8
-import os
-import time
-import csv
-
-# 柠檬精：adb shell am start -W -n com.mallestudio.flash/.ui.splash.LauncherActivity
-def LaunchApp():
-    cmd = "adb shell am start -W -n com.mallestudio.flash.debug/.ui.splash.LauncherActivity"
-    os.popen(cmd)
+import argparse
 
 
-def click():
-    cmd = "adb shell input tap 500 800"
-    os.popen(cmd)
-
-# 上下浏览
-def scan(nums):
-    LaunchApp()
-    time.sleep(6)
-    swipe = "adb shell input swipe 500 800 500 10"
-    for i in range(nums):
-        time.sleep(2)
-        os.popen(swipe)
-
-# 左滑
-def next(nums):
-    LaunchApp()
-    time.sleep(6)
-    click()
-    swipe1 = "adb shell input swipe 500 500 100 500"
-    for i in range(nums):
-        # scan(2)
-        time.sleep(5)
-        os.popen(swipe1)
-
-# 停止App
-def StopApp():
-    cmd = "adb shell am force-stop com.mallestudio.flash"
-    os.popen(cmd)
+def test_for_sys(year, name, body):
+    print('the year is', year)
+    print('the name is', name)
+    print('the body is', body)
 
 
-if __name__ == "__main__":
-    option,nums = input("滑动-1，左滑切内容-2，请选择操作和执行的次数:").split()
-    if option == "1":
-        scan(int(nums))
-    else:
-        next(int(nums))
+parser = argparse.ArgumentParser(description='Test for argparse')
+parser.add_argument('--name', '-n', help='name 属性，非必要参数')
+parser.add_argument('--year', '-y', help='year 属性，非必要参数，但是有默认值', default=2017)
+parser.add_argument('--body', '-b', help='body 属性，必要参数', required=True)
+args = parser.parse_args()
+
+if __name__ == '__main__':
+    try:
+        test_for_sys(args.year, args.name, args.body)
+    except Exception as e:
+        print(e)
